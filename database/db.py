@@ -77,3 +77,62 @@ def get_initiative_by_id(initiative_id):
     conn.close()
 
     return row
+
+conn.execute("""
+CREATE TABLE IF NOT EXISTS project_artifacts (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    initiative_id INTEGER,
+    artifact_type TEXT,
+    content TEXT,
+    status TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)
+""")
+def save_artifact(
+    initiative_id,
+    artifact_type,
+    content,
+    status="approved"
+):
+
+    conn = sqlite3.connect(DB_PATH)
+
+    conn.execute("""
+    INSERT INTO project_artifacts (
+        initiative_id,
+        artifact_type,
+        content,
+        status
+    )
+    VALUES (?, ?, ?, ?)
+    """, (
+        initiative_id,
+        artifact_type,
+        content,
+        status
+    ))
+
+    conn.commit()
+    conn.close()
+def get_artifact(
+    initiative_id,
+    artifact_type
+):
+
+    conn = sqlite3.connect(DB_PATH)
+
+    row = conn.execute("""
+    SELECT content
+    FROM project_artifacts
+    WHERE initiative_id = ?
+    AND artifact_type = ?
+    ORDER BY id DESC
+    LIMIT 1
+    """, (
+        initiative_id,
+        artifact_type
+    )).fetchone()
+
+    conn.close()
+
+    return row
