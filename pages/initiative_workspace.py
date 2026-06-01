@@ -2,7 +2,9 @@ import streamlit as st
 from services.gemini_service import generate_discovery
 
 from database.db import (
-    get_initiative_by_id
+    get_initiative_by_id,
+    save_artifact,
+    get_artifact
 )
 
 st.title("📁 Initiative Workspace")
@@ -21,6 +23,11 @@ initiative_id = st.session_state[
 
 initiative = get_initiative_by_id(
     initiative_id
+)
+
+saved_discovery = get_artifact(
+    initiative_id,
+    "discovery"
 )
 
 if not initiative:
@@ -119,11 +126,14 @@ if st.button(
         st.session_state[
             "discovery_output"
         ] = output
+        save_artifact(
+            initiative_id,
+            "discovery",
+            output
+        )
 
-if "discovery_output" in st.session_state:
-
+if saved_discovery:
     st.markdown(
-        st.session_state[
-            "discovery_output"
-        ]
+        
+        saved_discovery[0]
     )
