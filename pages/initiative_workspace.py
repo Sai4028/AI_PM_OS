@@ -1,4 +1,5 @@
 import streamlit as st
+from services.gemini_service import generate_discovery
 
 from database.db import (
     get_initiative_by_id
@@ -92,3 +93,37 @@ st.divider()
 st.info(
     "Discovery Module Coming Soon"
 )
+
+st.divider()
+
+st.subheader(
+    "🤖 AI PM Insights"
+)
+
+if st.button(
+    "Analyze Initiative"
+):
+
+    with st.spinner(
+        "Analyzing..."
+    ):
+
+        output = generate_discovery(
+            initiative[1],
+            initiative[2],
+            initiative[3],
+            initiative[4],
+            initiative[5]
+        )
+
+        st.session_state[
+            "discovery_output"
+        ] = output
+
+if "discovery_output" in st.session_state:
+
+    st.markdown(
+        st.session_state[
+            "discovery_output"
+        ]
+    )
