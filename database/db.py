@@ -17,6 +17,17 @@ def init_db():
     )
     """)
 
+    conn.execute("""
+    CREATE TABLE IF NOT EXISTS project_artifacts (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        initiative_id INTEGER,
+        artifact_type TEXT,
+        content TEXT,
+        status TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
+    """)
+
     conn.commit()
     conn.close()
 
@@ -78,16 +89,6 @@ def get_initiative_by_id(initiative_id):
 
     return row
 
-conn.execute("""
-CREATE TABLE IF NOT EXISTS project_artifacts (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    initiative_id INTEGER,
-    artifact_type TEXT,
-    content TEXT,
-    status TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-)
-""")
 def save_artifact(
     initiative_id,
     artifact_type,
