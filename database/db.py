@@ -5,6 +5,7 @@ DB_PATH = "data/ai_pm_os.db"
 
 Path("data").mkdir(exist_ok=True)
 
+
 def init_db():
     conn = sqlite3.connect(DB_PATH)
 
@@ -66,3 +67,17 @@ def get_initiatives():
     conn.close()
 
     return rows
+
+
+def get_initiative_by_id(initiative_id):
+    conn = sqlite3.connect(DB_PATH)
+
+    row = conn.execute("""
+    SELECT *
+    FROM initiatives
+    WHERE id = ?
+    """, (initiative_id,)).fetchone()
+
+    conn.close()
+
+    return row
