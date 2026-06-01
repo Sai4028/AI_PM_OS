@@ -1,9 +1,5 @@
 import sqlite3
-from pathlib import Path
-
-DB_PATH = "data/ai_pm_os.db"
-
-Path("data").mkdir(exist_ok=True)
+DB_PATH = "ai_pm_os.db"
 
 
 def init_db():
