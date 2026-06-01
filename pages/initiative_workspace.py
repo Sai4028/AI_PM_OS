@@ -1,6 +1,8 @@
 import streamlit as st
-from services.gemini_service import generate_discovery
-
+from services.gemini_service import (
+    generate_discovery,
+    generate_market_analysis
+)
 from database.db import (
     get_initiative_by_id,
     save_artifact,
@@ -28,6 +30,10 @@ initiative = get_initiative_by_id(
 saved_discovery = get_artifact(
     initiative_id,
     "discovery"
+)
+saved_market = get_artifact(
+    initiative_id,
+    "market"
 )
 
 if not initiative:
@@ -137,3 +143,35 @@ if saved_discovery:
         
         saved_discovery[0]
     )
+st.divider()
+
+st.subheader("📈 Market Analysis")
+if st.button(
+    "Generate Market Analysis"
+):
+
+    if saved_discovery:
+
+        with st.spinner(
+            "Analyzing Market..."
+        ):
+
+            output = generate_market_analysis(
+                initiative[1],
+                initiative[2],
+                initiative[3],
+                saved_discovery[0]
+            )
+
+            save_artifact(
+                initiative_id,
+                "market",
+                output
+            )
+
+            st.rerun()
+    if saved_market:
+
+        st.markdown(
+            saved_market[0]
+        )
