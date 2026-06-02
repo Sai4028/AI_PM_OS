@@ -36,6 +36,21 @@ saved_market = get_artifact(
     "market"
 )
 
+saved_competition = get_artifact(
+    initiative_id,
+    "competition"
+)
+
+saved_strategy = get_artifact(
+    initiative_id,
+    "strategy"
+)
+
+saved_roadmap = get_artifact(
+    initiative_id,
+    "roadmap"
+)
+
 if not initiative:
 
     st.error(
@@ -175,3 +190,84 @@ if st.button(
         st.markdown(
             saved_market[0]
         )
+    st.divider()
+
+st.subheader("🏆 Competition Analysis")
+
+if st.button(
+    "Generate Competition Analysis"
+):
+
+    output = """
+Competition Analysis Placeholder
+
+Coming Soon
+"""
+
+    save_artifact(
+        initiative_id,
+        "competition",
+        output
+    )
+
+    st.rerun()
+
+if saved_competition:
+
+    st.markdown(
+        saved_competition[0]
+    )
+st.divider()
+
+st.subheader("🎯 Product Strategy")
+
+if st.button(
+    "Generate Strategy"
+):
+
+    output = """
+Product Strategy Placeholder
+
+Coming Soon
+"""
+
+    save_artifact(
+        initiative_id,
+        "strategy",
+        output
+    )
+
+    st.rerun()
+
+if saved_strategy:
+
+    st.markdown(
+        saved_strategy[0]
+    )
+st.divider()
+
+st.subheader("🗺️ Roadmap")
+
+if st.button(
+    "Generate Roadmap"
+):
+
+    output = """
+Roadmap Placeholder
+
+Coming Soon
+"""
+
+    save_artifact(
+        initiative_id,
+        "roadmap",
+        output
+    )
+
+    st.rerun()
+
+if saved_roadmap:
+
+    st.markdown(
+        saved_roadmap[0]
+    )
