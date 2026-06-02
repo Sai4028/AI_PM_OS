@@ -64,9 +64,9 @@ if not initiative:
 
     st.stop()
 
-st.header(
-    initiative[1]
-)
+st.header(initiative[1])
+
+# Progress Section
 
 st.divider()
 
@@ -96,7 +96,7 @@ if saved_roadmap:
     st.success("✓ Roadmap")
 else:
     st.info("○ Roadmap")
-    
+
 if saved_prototype:
     st.success("✓ Prototype")
 else:
@@ -104,223 +104,176 @@ else:
 
 st.divider()
 
-st.caption(
-    initiative[2]
-)
+# Tabs
 
-st.subheader(
-    "Problem Statement"
-)
+tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
+    "🏠 Overview",
+    "🔍 Discovery",
+    "📈 Market",
+    "🏆 Competition",
+    "🎯 Strategy",
+    "🗺️ Roadmap",
+    "🎨 Prototype"
+])
 
-st.write(
-    initiative[3]
-)
+# OVERVIEW
 
-st.subheader(
-    "Target Users"
-)
+with tab1:
 
-st.write(
-    initiative[4]
-)
+    st.caption(initiative[2])
 
-st.subheader(
-    "Business Goal"
-)
+    st.subheader("Problem Statement")
+    st.write(initiative[3])
 
-st.write(
-    initiative[5]
-)
+    st.subheader("Target Users")
+    st.write(initiative[4])
 
-st.divider()
+    st.subheader("Business Goal")
+    st.write(initiative[5])
 
-st.subheader(
-    "Project Modules"
-)
+# DISCOVERY
 
-modules = [
-    "Discovery",
-    "Market Analysis",
-    "Competition",
-    "Strategy",
-    "Roadmap",
-    "Prototype",
-    "PRD",
-    "FSD",
-    "Release Notes",
-    "Sales Deck"
-]
+with tab2:
 
-for module in modules:
+    st.subheader("🤖 AI PM Insights")
 
-    st.write(
-        f"○ {module}"
-    )
+    if st.button("Analyze Initiative"):
 
-st.divider()
+        with st.spinner("Analyzing..."):
 
-st.info(
-    "Discovery Module Coming Soon"
-)
-
-st.divider()
-
-st.subheader(
-    "🤖 AI PM Insights"
-)
-
-if st.button(
-    "Analyze Initiative"
-):
-
-    with st.spinner(
-        "Analyzing..."
-    ):
-
-        output = generate_discovery(
-            initiative[1],
-            initiative[2],
-            initiative[3],
-            initiative[4],
-            initiative[5]
-        )
-
-        st.session_state[
-            "discovery_output"
-        ] = output
-        save_artifact(
-            initiative_id,
-            "discovery",
-            output
-        )
-
-if saved_discovery:
-    st.markdown(
-        
-        saved_discovery[0]
-    )
-st.divider()
-
-st.subheader("📈 Market Analysis")
-if st.button(
-    "Generate Market Analysis"
-):
-
-    if saved_discovery:
-
-        with st.spinner(
-            "Analyzing Market..."
-        ):
-
-            output = generate_market_analysis(
+            output = generate_discovery(
                 initiative[1],
                 initiative[2],
                 initiative[3],
-                saved_discovery[0]
+                initiative[4],
+                initiative[5]
             )
 
             save_artifact(
                 initiative_id,
-                "market",
+                "discovery",
                 output
             )
 
             st.rerun()
+
+    if saved_discovery:
+        st.markdown(saved_discovery[0])
+
+# MARKET
+
+with tab3:
+
+    st.subheader("📈 Market Analysis")
+
+    if st.button("Generate Market Analysis"):
+
+        if saved_discovery:
+
+            with st.spinner("Analyzing Market..."):
+
+                output = generate_market_analysis(
+                    initiative[1],
+                    initiative[2],
+                    initiative[3],
+                    saved_discovery[0]
+                )
+
+                save_artifact(
+                    initiative_id,
+                    "market",
+                    output
+                )
+
+                st.rerun()
+
     if saved_market:
+        st.markdown(saved_market[0])
 
-        st.markdown(
-            saved_market[0]
-        )
-    st.divider()
+# COMPETITION
 
-st.subheader("🏆 Competition Analysis")
+with tab4:
 
-if st.button(
-    "Generate Competition Analysis"
-):
+    st.subheader("🏆 Competition Analysis")
 
-    output = """
+    if st.button("Generate Competition Analysis"):
+
+        output = """
 Competition Analysis Placeholder
 
 Coming Soon
 """
 
-    save_artifact(
-        initiative_id,
-        "competition",
-        output
-    )
+        save_artifact(
+            initiative_id,
+            "competition",
+            output
+        )
 
-    st.rerun()
+        st.rerun()
 
-if saved_competition:
+    if saved_competition:
+        st.markdown(saved_competition[0])
 
-    st.markdown(
-        saved_competition[0]
-    )
-st.divider()
+# STRATEGY
 
-st.subheader("🎯 Product Strategy")
+with tab5:
 
-if st.button(
-    "Generate Strategy"
-):
+    st.subheader("🎯 Product Strategy")
 
-    output = """
+    if st.button("Generate Strategy"):
+
+        output = """
 Product Strategy Placeholder
 
 Coming Soon
 """
 
-    save_artifact(
-        initiative_id,
-        "strategy",
-        output
-    )
+        save_artifact(
+            initiative_id,
+            "strategy",
+            output
+        )
 
-    st.rerun()
+        st.rerun()
 
-if saved_strategy:
+    if saved_strategy:
+        st.markdown(saved_strategy[0])
 
-    st.markdown(
-        saved_strategy[0]
-    )
-st.divider()
+# ROADMAP
 
-st.subheader("🗺️ Roadmap")
+with tab6:
 
-if st.button(
-    "Generate Roadmap"
-):
+    st.subheader("🗺️ Roadmap")
 
-    output = """
+    if st.button("Generate Roadmap"):
+
+        output = """
 Roadmap Placeholder
 
 Coming Soon
 """
 
-    save_artifact(
-        initiative_id,
-        "roadmap",
-        output
-    )
+        save_artifact(
+            initiative_id,
+            "roadmap",
+            output
+        )
 
-    st.rerun()
+        st.rerun()
 
-if saved_roadmap:
+    if saved_roadmap:
+        st.markdown(saved_roadmap[0])
 
-    st.markdown(
-        saved_roadmap[0]
-    )
-st.divider()
+# PROTOTYPE
 
-st.subheader("🎨 Prototype")
+with tab7:
 
-if st.button(
-    "Generate Prototype"
-):
+    st.subheader("🎨 Prototype")
 
-    output = """
+    if st.button("Generate Prototype"):
+
+        output = """
 Prototype Placeholder
 
 Screen 1:
@@ -336,16 +289,13 @@ Screen 4:
 Recommendations
 """
 
-    save_artifact(
-        initiative_id,
-        "prototype",
-        output
-    )
+        save_artifact(
+            initiative_id,
+            "prototype",
+            output
+        )
 
-    st.rerun()
+        st.rerun()
 
-if saved_prototype:
-
-    st.markdown(
-        saved_prototype[0]
-    )
+    if saved_prototype:
+        st.markdown(saved_prototype[0])
