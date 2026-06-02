@@ -51,6 +51,11 @@ saved_roadmap = get_artifact(
     "roadmap"
 )
 
+saved_prototype = get_artifact(
+    initiative_id,
+    "prototype"
+)
+
 if not initiative:
 
     st.error(
@@ -91,6 +96,11 @@ if saved_roadmap:
     st.success("✓ Roadmap")
 else:
     st.info("○ Roadmap")
+    
+if saved_prototype:
+    st.success("✓ Prototype")
+else:
+    st.info("○ Prototype")
 
 st.divider()
 
@@ -301,4 +311,41 @@ if saved_roadmap:
 
     st.markdown(
         saved_roadmap[0]
+    )
+st.divider()
+
+st.subheader("🎨 Prototype")
+
+if st.button(
+    "Generate Prototype"
+):
+
+    output = """
+Prototype Placeholder
+
+Screen 1:
+Dashboard
+
+Screen 2:
+Search
+
+Screen 3:
+Details
+
+Screen 4:
+Recommendations
+"""
+
+    save_artifact(
+        initiative_id,
+        "prototype",
+        output
+    )
+
+    st.rerun()
+
+if saved_prototype:
+
+    st.markdown(
+        saved_prototype[0]
     )
