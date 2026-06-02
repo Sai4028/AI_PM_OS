@@ -63,6 +63,37 @@ st.header(
     initiative[1]
 )
 
+st.divider()
+
+st.subheader("📊 Project Progress")
+
+if saved_discovery:
+    st.success("✓ Discovery")
+else:
+    st.info("○ Discovery")
+
+if saved_market:
+    st.success("✓ Market Analysis")
+else:
+    st.info("○ Market Analysis")
+
+if saved_competition:
+    st.success("✓ Competition Analysis")
+else:
+    st.info("○ Competition Analysis")
+
+if saved_strategy:
+    st.success("✓ Product Strategy")
+else:
+    st.info("○ Product Strategy")
+
+if saved_roadmap:
+    st.success("✓ Roadmap")
+else:
+    st.info("○ Roadmap")
+
+st.divider()
+
 st.caption(
     initiative[2]
 )
