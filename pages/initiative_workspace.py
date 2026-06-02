@@ -72,35 +72,22 @@ st.divider()
 
 st.subheader("📊 Project Progress")
 
-if saved_discovery:
-    st.success("✓ Discovery")
-else:
-    st.info("○ Discovery")
+completed = sum([
+    bool(saved_discovery),
+    bool(saved_market),
+    bool(saved_competition),
+    bool(saved_strategy),
+    bool(saved_roadmap),
+    bool(saved_prototype)
+])
 
-if saved_market:
-    st.success("✓ Market Analysis")
-else:
-    st.info("○ Market Analysis")
+total = 6
 
-if saved_competition:
-    st.success("✓ Competition Analysis")
-else:
-    st.info("○ Competition Analysis")
+st.progress(completed / total)
 
-if saved_strategy:
-    st.success("✓ Product Strategy")
-else:
-    st.info("○ Product Strategy")
-
-if saved_roadmap:
-    st.success("✓ Roadmap")
-else:
-    st.info("○ Roadmap")
-
-if saved_prototype:
-    st.success("✓ Prototype")
-else:
-    st.info("○ Prototype")
+st.write(
+    f"{completed}/{total} Modules Complete"
+)
 
 st.divider()
 
