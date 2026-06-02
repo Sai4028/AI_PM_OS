@@ -56,6 +56,20 @@ saved_prototype = get_artifact(
     "prototype"
 )
 
+saved_prd = get_artifact(
+    initiative_id,
+    "prd"
+)
+
+saved_fsd = get_artifact(
+    initiative_id,
+    "fsd"
+)
+
+saved_stories = get_artifact(
+    initiative_id,
+    "stories"
+)
 if not initiative:
 
     st.error(
@@ -79,6 +93,7 @@ completed = sum([
     bool(saved_strategy),
     bool(saved_roadmap),
     bool(saved_prototype)
+    
 ])
 
 total = 6
@@ -93,29 +108,75 @@ st.divider()
 
 # Tabs
 
-tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
+tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10 = st.tabs([
     "🏠 Overview",
     "🔍 Discovery",
     "📈 Market",
     "🏆 Competition",
     "🎯 Strategy",
     "🗺️ Roadmap",
-    "🎨 Prototype"
+    "🎨 Prototype",
+    "📄 PRD",
+    "📑 FSD",
+    "📋 User Stories"
 ])
 
 # OVERVIEW
 
 with tab1:
 
-    st.caption(initiative[2])
+    st.subheader("📋 Project Summary")
 
-    st.subheader("Problem Statement")
+    st.write(f"**Project Name:** {initiative[1]}")
+    st.write(f"**Industry:** {initiative[2]}")
+
+    st.divider()
+
+    st.subheader("📊 Project Status")
+
+    if not saved_discovery:
+        next_step = "Generate Discovery"
+
+    elif not saved_market:
+        next_step = "Generate Market Analysis"
+
+    elif not saved_competition:
+        next_step = "Generate Competition Analysis"
+
+    elif not saved_strategy:
+        next_step = "Generate Product Strategy"
+
+    elif not saved_roadmap:
+        next_step = "Generate Roadmap"
+
+    elif not saved_prototype:
+        next_step = "Generate Prototype"
+
+    elif not saved_prd:
+        next_step = "Generate PRD"
+
+    elif not saved_fsd:
+        next_step = "Generate FSD"
+
+    elif not saved_stories:
+        next_step = "Generate User Stories"
+
+    else:
+        next_step = "Workflow Complete"
+
+    st.info(
+        f"Recommended Next Action: {next_step}"
+    )
+
+    st.divider()
+
+    st.subheader("🎯 Problem Statement")
     st.write(initiative[3])
 
-    st.subheader("Target Users")
+    st.subheader("👥 Target Users")
     st.write(initiative[4])
 
-    st.subheader("Business Goal")
+    st.subheader("🚀 Business Goal")
     st.write(initiative[5])
 
 # DISCOVERY
