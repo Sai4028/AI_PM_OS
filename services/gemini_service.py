@@ -57,15 +57,15 @@ Keep response practical.
         prompt
     )
 
+    return response.text
+
+
 def generate_market_analysis(
     project_name,
     industry,
     problem_statement,
     discovery_output
 ):
-
-    import streamlit as st
-    import google.generativeai as genai
 
     genai.configure(
         api_key=st.secrets["GEMINI_API_KEY"]
@@ -108,7 +108,5 @@ Keep it concise and practical.
     response = model.generate_content(
         prompt
     )
-
-    return response.text
 
     return response.text
