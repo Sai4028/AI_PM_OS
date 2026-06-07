@@ -86,17 +86,23 @@ st.divider()
 
 st.subheader("📊 Project Progress")
 
-completed = sum([
-    bool(saved_discovery),
-    bool(saved_market),
-    bool(saved_competition),
-    bool(saved_strategy),
-    bool(saved_roadmap),
-    bool(saved_prototype)
-    
-])
+artifact_status = {
+    "Discovery": saved_discovery,
+    "Market": saved_market,
+    "Competition": saved_competition,
+    "Strategy": saved_strategy,
+    "Roadmap": saved_roadmap,
+    "Prototype": saved_prototype,
+    "PRD": saved_prd,
+    "FSD": saved_fsd,
+    "Stories": saved_stories
+}
 
-total = 6
+completed = sum(
+    bool(v) for v in artifact_status.values()
+)
+
+total = len(artifact_status)
 
 st.progress(completed / total)
 
@@ -347,3 +353,84 @@ Recommendations
 
     if saved_prototype:
         st.markdown(saved_prototype[0])
+# PRD
+
+with tab8:
+
+    st.subheader("📄 PRD")
+
+    if st.button("Generate PRD"):
+
+        output = """
+PRD Placeholder
+
+Coming Soon
+"""
+
+        save_artifact(
+            initiative_id,
+            "prd",
+            output
+        )
+
+        st.rerun()
+
+    if saved_prd:
+
+        st.markdown(
+            saved_prd[0]
+        )
+# FSD
+
+with tab9:
+
+    st.subheader("📑 FSD")
+
+    if st.button("Generate FSD"):
+
+        output = """
+FSD Placeholder
+
+Coming Soon
+"""
+
+        save_artifact(
+            initiative_id,
+            "fsd",
+            output
+        )
+
+        st.rerun()
+
+    if saved_fsd:
+
+        st.markdown(
+            saved_fsd[0]
+        )
+# USER STORIES
+
+with tab10:
+
+    st.subheader("📋 User Stories")
+
+    if st.button("Generate User Stories"):
+
+        output = """
+User Stories Placeholder
+
+Coming Soon
+"""
+
+        save_artifact(
+            initiative_id,
+            "stories",
+            output
+        )
+
+        st.rerun()
+
+    if saved_stories:
+
+        st.markdown(
+            saved_stories[0]
+        )
