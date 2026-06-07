@@ -394,24 +394,24 @@ with tab7:
 
     if saved_prototype:
 
-    preview_tab, code_tab = st.tabs(
-        ["Preview", "HTML Code"]
-    )
-
-    with preview_tab:
-
-        components.html(
-            saved_prototype[0],
-            height=800,
-            scrolling=True
+        preview_tab, code_tab = st.tabs(
+            ["Preview", "HTML Code"]
         )
-
-    with code_tab:
-
-        st.code(
-            saved_prototype[0],
-            language="html"
-        )
+    
+        with preview_tab:
+    
+            components.html(
+                saved_prototype[0],
+                height=800,
+                scrolling=True
+            )
+    
+        with code_tab:
+    
+            st.code(
+                saved_prototype[0],
+                language="html"
+            )
 # PRD
 
 with tab8:
