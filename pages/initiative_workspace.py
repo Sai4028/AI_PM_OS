@@ -1,7 +1,14 @@
 import streamlit as st
 from services.gemini_service import (
     generate_discovery,
-    generate_market_analysis
+    generate_market_analysis,
+    generate_competition_analysis,
+    generate_strategy,
+    generate_roadmap,
+    generate_prototype,
+    generate_prd,
+    generate_fsd,
+    generate_user_stories
 )
 from database.db import (
     get_initiative_by_id,
