@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 from services.gemini_service import (
     generate_discovery,
     generate_market_analysis,
@@ -253,28 +254,44 @@ with tab3:
 
 # COMPETITION
 
+# COMPETITION
+
 with tab4:
 
     st.subheader("🏆 Competition Analysis")
 
     if st.button("Generate Competition Analysis"):
 
-        output = """
-Competition Analysis Placeholder
+        if saved_market:
 
-Coming Soon
-"""
+            output = generate_competition_analysis(
+                initiative[1],
+                initiative[2],
+                initiative[3],
+                saved_market[0]
+            )
 
-        save_artifact(
-            initiative_id,
-            "competition",
-            output
-        )
+            save_artifact(
+                initiative_id,
+                "competition",
+                output
+            )
 
-        st.rerun()
+            st.rerun()
+
+        else:
+
+            st.warning(
+                "Generate Market Analysis first."
+            )
 
     if saved_competition:
-        st.markdown(saved_competition[0])
+
+        st.markdown(
+            saved_competition[0]
+        )
+
+# STRATEGY
 
 # STRATEGY
 
@@ -284,22 +301,32 @@ with tab5:
 
     if st.button("Generate Strategy"):
 
-        output = """
-Product Strategy Placeholder
+        if saved_competition:
 
-Coming Soon
-"""
+            output = generate_strategy(
+                initiative[1],
+                saved_competition[0]
+            )
 
-        save_artifact(
-            initiative_id,
-            "strategy",
-            output
-        )
+            save_artifact(
+                initiative_id,
+                "strategy",
+                output
+            )
 
-        st.rerun()
+            st.rerun()
+
+        else:
+
+            st.warning(
+                "Generate Competition Analysis first."
+            )
 
     if saved_strategy:
-        st.markdown(saved_strategy[0])
+
+        st.markdown(
+            saved_strategy[0]
+        )
 
 # ROADMAP
 
@@ -309,22 +336,32 @@ with tab6:
 
     if st.button("Generate Roadmap"):
 
-        output = """
-Roadmap Placeholder
+        if saved_strategy:
 
-Coming Soon
-"""
+            output = generate_roadmap(
+                initiative[1],
+                saved_strategy[0]
+            )
 
-        save_artifact(
-            initiative_id,
-            "roadmap",
-            output
-        )
+            save_artifact(
+                initiative_id,
+                "roadmap",
+                output
+            )
 
-        st.rerun()
+            st.rerun()
+
+        else:
+
+            st.warning(
+                "Generate Strategy first."
+            )
 
     if saved_roadmap:
-        st.markdown(saved_roadmap[0])
+
+        st.markdown(
+            saved_roadmap[0]
+        )
 
 # PROTOTYPE
 
@@ -334,32 +371,47 @@ with tab7:
 
     if st.button("Generate Prototype"):
 
-        output = """
-Prototype Placeholder
+        if saved_roadmap:
 
-Screen 1:
-Dashboard
+            output = generate_prototype(
+                initiative[1],
+                saved_roadmap[0]
+            )
 
-Screen 2:
-Search
+            save_artifact(
+                initiative_id,
+                "prototype",
+                output
+            )
 
-Screen 3:
-Details
+            st.rerun()
 
-Screen 4:
-Recommendations
-"""
+        else:
 
-        save_artifact(
-            initiative_id,
-            "prototype",
-            output
-        )
-
-        st.rerun()
+            st.warning(
+                "Generate Roadmap first."
+            )
 
     if saved_prototype:
-        st.markdown(saved_prototype[0])
+
+    preview_tab, code_tab = st.tabs(
+        ["Preview", "HTML Code"]
+    )
+
+    with preview_tab:
+
+        components.html(
+            saved_prototype[0],
+            height=800,
+            scrolling=True
+        )
+
+    with code_tab:
+
+        st.code(
+            saved_prototype[0],
+            language="html"
+        )
 # PRD
 
 with tab8:
@@ -368,19 +420,26 @@ with tab8:
 
     if st.button("Generate PRD"):
 
-        output = """
-PRD Placeholder
+        if saved_prototype:
 
-Coming Soon
-"""
+            output = generate_prd(
+                initiative[1],
+                saved_prototype[0]
+            )
 
-        save_artifact(
-            initiative_id,
-            "prd",
-            output
-        )
+            save_artifact(
+                initiative_id,
+                "prd",
+                output
+            )
 
-        st.rerun()
+            st.rerun()
+
+        else:
+
+            st.warning(
+                "Generate Prototype first."
+            )
 
     if saved_prd:
 
@@ -395,19 +454,26 @@ with tab9:
 
     if st.button("Generate FSD"):
 
-        output = """
-FSD Placeholder
+        if saved_prd:
 
-Coming Soon
-"""
+            output = generate_fsd(
+                initiative[1],
+                saved_prd[0]
+            )
 
-        save_artifact(
-            initiative_id,
-            "fsd",
-            output
-        )
+            save_artifact(
+                initiative_id,
+                "fsd",
+                output
+            )
 
-        st.rerun()
+            st.rerun()
+
+        else:
+
+            st.warning(
+                "Generate PRD first."
+            )
 
     if saved_fsd:
 
@@ -422,19 +488,26 @@ with tab10:
 
     if st.button("Generate User Stories"):
 
-        output = """
-User Stories Placeholder
+        if saved_fsd:
 
-Coming Soon
-"""
+            output = generate_user_stories(
+                initiative[1],
+                saved_fsd[0]
+            )
 
-        save_artifact(
-            initiative_id,
-            "stories",
-            output
-        )
+            save_artifact(
+                initiative_id,
+                "stories",
+                output
+            )
 
-        st.rerun()
+            st.rerun()
+
+        else:
+
+            st.warning(
+                "Generate FSD first."
+            )
 
     if saved_stories:
 
