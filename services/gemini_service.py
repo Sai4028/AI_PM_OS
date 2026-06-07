@@ -252,44 +252,44 @@ def generate_prototype(
         "gemini-2.5-flash"
     )
 
-            prompt = f"""
-    You are a Senior Product Designer and Frontend Architect.
-    
-    Project:
-    {project_name}
-    
-    Roadmap:
-    {roadmap_output}
-    
-    Generate a complete responsive HTML prototype.
-    
-    Requirements:
-    
-    - Use pure HTML
-    - Use inline CSS
-    - Modern SaaS style
-    - Include sidebar navigation
-    - Include page header
-    - Include KPI cards
-    - Include search/filter section
-    - Include data table
-    - Include action buttons
-    - Include realistic sample data
-    - Mobile responsive layout
-    
-    Return ONLY valid HTML.
-    
-    Do not provide explanations.
-    Do not wrap in markdown.
-    Do not use triple backticks.
-    """
-    
-        response = model.generate_content(
-            prompt
-        )
-    
-        return response.text
+    prompt = f"""
+You are a Senior Product Designer and Frontend Architect.
 
+Project:
+{project_name}
+
+Roadmap:
+{roadmap_output}
+
+Generate a complete responsive HTML prototype.
+
+Requirements:
+
+- Use pure HTML
+- Use inline CSS
+- Modern SaaS style
+- Include sidebar navigation
+- Include page header
+- Include KPI cards
+- Include search/filter section
+- Include data table
+- Include action buttons
+- Include realistic sample data
+- Mobile responsive layout
+
+Return ONLY valid HTML.
+
+Do not provide explanations.
+Do not wrap in markdown.
+Do not use triple backticks.
+"""
+
+    response = model.generate_content(
+        prompt
+    )
+
+    return response.text
+    
 def generate_prd(
     project_name,
     strategy_output
